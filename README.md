@@ -87,3 +87,4 @@ The `Jenkinsfile` runs on Windows or Linux agents that have Node.js installed.
 3. Run **Build with Parameters** and choose `TEST_SUITE` (`api`, `ui` or `all`).
 
 Jenkins shows the test results from JUnit XML and publishes the Playwright HTML report on every build. It checks GitHub for new commits every 5 minutes.
+Tests run automatically on Jenkins.
