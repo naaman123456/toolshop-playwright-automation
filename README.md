@@ -9,6 +9,7 @@ End-to-end UI and API test automation for [Practice Software Testing (Toolshop)]
 - TypeScript
 - Page Object Model (POM)
 - GitHub Actions (CI)
+- Jenkins (CI) — see `Jenkinsfile`
 
 ## Project Structure
 ```
@@ -76,3 +77,13 @@ Open the HTML report:
 ```bash
 npx playwright show-report
 ```
+
+## Jenkins
+
+The `Jenkinsfile` runs on Windows or Linux agents that have Node.js installed.
+
+1. Install the plugins: Pipeline, Git, JUnit, HTML Publisher.
+2. Create a **Pipeline** job → *Pipeline script from SCM* → Git → this repo URL, branch `*/main`, script path `Jenkinsfile`.
+3. Run **Build with Parameters** and choose `TEST_SUITE` (`api`, `ui` or `all`).
+
+Jenkins shows the test results from JUnit XML and publishes the Playwright HTML report on every build. It checks GitHub for new commits every 5 minutes.
