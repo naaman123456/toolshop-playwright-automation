@@ -1,7 +1,7 @@
 // Runs on Windows or Linux agents. The agent needs Node.js on the PATH.
 // Plugins used: Pipeline, Git, JUnit, HTML Publisher.
 
-def run(String cmd) {
+def runCmd(String cmd) {
     if (isUnix()) {
         sh cmd
     } else {
@@ -37,14 +37,14 @@ pipeline {
     stages {
         stage('Install dependencies') {
             steps {
-                run 'node -v'
-                run 'npm ci'
+                runCmd('node -v')
+                runCmd('npm ci')
             }
         }
 
         stage('Install Playwright browsers') {
             steps {
-                run 'npx playwright install chromium'
+                runCmd('npx playwright install chromium')
             }
         }
 
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     def paths = [api: 'tests/api', ui: 'tests/ui', all: '']
-                    run "npx playwright test ${paths[params.TEST_SUITE]}"
+                    runCmd("npx playwright test ${paths[params.TEST_SUITE]}")
                 }
             }
         }
